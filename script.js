@@ -18,19 +18,25 @@ document.querySelectorAll('input, select, textarea').forEach(function(el) {
 //function to match password fields
 
 function matchPasswords(){
-    if (password1.value === password2.value){
+    if (password1.value !== "" || password2.value !== ""){
+        if (password1.value === password2.value){
+            passwordsEl.classList.remove("error")
+        }
+        else{
+            passwordsEl.classList.add("error")
+        }
+    } else{
         passwordsEl.classList.remove("error")
     }
-    else{
-        passwordsEl.classList.add("error")
-    }
+   
 }
 
-passwords.forEach(function (input){
-    input.addEventListener('input', matchPasswords)
-})
+
+password2.addEventListener('blur', matchPasswords); 
+
 
 numberEl.addEventListener('input', (event) =>{
+
      if (numberEl.validity.patternMismatch){
         numberEl.setCustomValidity("Please enter a valid phone-number")
     } 
